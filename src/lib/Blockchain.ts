@@ -45,9 +45,7 @@ const Blockchain = () => {
     const transactionHash: string = hash(stringify(transaction));
     const signature: string = signWithPrivateKey(privateKey, transactionHash);
 
-    transaction.signature = signature;
-
-    return transaction;
+    return {...transaction, signature};
   };
 
   const validateTransaction = (transaction: Transaction): boolean => {
@@ -92,13 +90,10 @@ const Blockchain = () => {
 
     return minedBlock;
   };
-  const proofOfWork = (block: Block): Block => {
-    block.nonce = 0;
-    while (!validateBlock(block)) {
-      block.nonce += 1;
-    }
+  const proofOfWork = (block: Block, nonce: number = 0): Block => {
+    const newBlock = { ...block, nonce };
 
-    return block;
+    return !validateBlock(newBlock) ? proofOfWork(newBlock, nonce + 1) : newBlock
   };
   const validateChain = (): boolean => {
     for (let index = chain.length - 1; index > 0; index -= 1) {

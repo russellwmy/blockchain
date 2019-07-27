@@ -5,7 +5,7 @@ interface Transaction {
   readonly timestamp: number;  // Unix time when transaction was created
   readonly coinbase: boolean;  // True if it's a coinbase transaction ie. transaction that awards the miner and creates new coins
 
-  signature?: string; // Transaction hash encrypted with the private key of the sender
+  readonly signature?: string; // Transaction hash encrypted with the private key of the sender
 }
 
 export default Transaction;
