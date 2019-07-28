@@ -12,7 +12,7 @@ export interface Block {
 
 export const createBlock = (
   transactions: ReadonlyArray<Transaction>,
-  previousHash: string,
+  previousHash?: string,
   timestamp: number = Date.now(),
   nonce: number = 0,
   difficulty: number = 4
