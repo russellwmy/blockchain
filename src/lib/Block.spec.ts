@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import test from 'ava';
-import { createBlock, validateBlock } from './Block';
+import { createBlock } from './Block';
 
 test('createBlock', t => {
   const genesisBlock = createBlock([], undefined, 0, 1337);
