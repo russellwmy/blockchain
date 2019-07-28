@@ -11,25 +11,28 @@ interface Blockchain {
 }
 
 export const addBlock = (blockchain: Blockchain, block: Block): Blockchain => {
-  const transactions = blockchain.pendingTransactions
-    .filter(transaction => !block.transactions
-      .map(blockTransaction => blockTransaction.signature)
-      .includes(transaction.signature),
-    );
+  const transactions = blockchain.pendingTransactions.filter(
+    transaction =>
+      !block.transactions
+        .map(blockTransaction => blockTransaction.signature)
+        .includes(transaction.signature)
+  );
   return {
     ...blockchain,
     chain: [...blockchain.chain, block],
-    pendingTransactions: [...transactions],
-  }
+    pendingTransactions: [...transactions]
+  };
 };
 
-export const addTransaction = (blockchain: Blockchain, transaction: Transaction) => {
+export const addTransaction = (
+  blockchain: Blockchain,
+  transaction: Transaction
+) => {
   return {
     ...blockchain,
-    pendingTransactions: [...blockchain.pendingTransactions, transaction],
-  }
+    pendingTransactions: [...blockchain.pendingTransactions, transaction]
+  };
 };
-
 
 export const validateChain = (blockchain: Blockchain): boolean => {
   // tslint:disable-next-line
@@ -39,7 +42,7 @@ export const validateChain = (blockchain: Blockchain): boolean => {
     const previusBlockHash: string = hash(stringify(previusBlock));
 
     // tslint:disable-next-line
-    if (!(validateBlock(block) && (block.previousHash === previusBlockHash))) {
+    if (!(validateBlock(block) && block.previousHash === previusBlockHash)) {
       return false;
     }
   }
@@ -47,8 +50,13 @@ export const validateChain = (blockchain: Blockchain): boolean => {
   return true;
 };
 
-export const checkTransaction = (blockchain: Blockchain, recievedTransaction: Transaction): boolean => {
-  const found = blockchain.pendingTransactions.find(transaction => transaction.signature === recievedTransaction.signature);
+export const checkTransaction = (
+  blockchain: Blockchain,
+  recievedTransaction: Transaction
+): boolean => {
+  const found = blockchain.pendingTransactions.find(
+    transaction => transaction.signature === recievedTransaction.signature
+  );
 
   return found !== null;
 };
@@ -58,10 +66,10 @@ export const createBlockChain = (): Blockchain => {
     chain: [],
     difficulty: 4,
     pendingTransactions: [],
-    reward: 10,
+    reward: 10
   };
   const genesisBlock = createBlock([], undefined, 0, 1337);
-  return addBlock(blockchain, genesisBlock)
+  return addBlock(blockchain, genesisBlock);
 };
 
 export default Blockchain;

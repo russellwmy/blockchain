@@ -10,7 +10,7 @@ export const createWallet = (): Wallet => {
 
   return {
     privateKey,
-    publicKey,
+    publicKey
   };
 };
 

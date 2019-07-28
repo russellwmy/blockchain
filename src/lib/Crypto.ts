@@ -13,20 +13,27 @@ export const hash = (text: string): string => {
     .createHash('sha256')
     .update(text)
     .digest('hex');
-}
+};
 
 // Generates the public/private key pair
 export const generateKeyPair = (): ReadonlyArray<string> => {
   const keyPair = ec.generateKeyPairHex();
   return [keyPair.ecpubhex, keyPair.ecprvhex];
-}
+};
 
 // Encrypts the data hash with the private key
-export const signWithPrivateKey = (privateKey: string, dataHash: string): string => {
+export const signWithPrivateKey = (
+  privateKey: string,
+  dataHash: string
+): string => {
   return ec.signHex(dataHash, privateKey);
-}
+};
 
 // Decrpypts the signature and compares it to the data hash
-export const verifyWithPublicKey = (publicKey: string, dataHash: string, signature: string): boolean => {
+export const verifyWithPublicKey = (
+  publicKey: string,
+  dataHash: string,
+  signature: string
+): boolean => {
   return ec.verifyHex(dataHash, signature, publicKey);
-}
+};

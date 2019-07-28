@@ -1,9 +1,9 @@
 import stringify from 'json-stable-stringify';
-import Block, { createBlock, validateBlock } from "./Block";
-import Blockchain from "./Blockchain";
+import Block, { createBlock, validateBlock } from './Block';
+import Blockchain from './Blockchain';
 import { hash } from './Crypto';
-import Transaction, { createTransaction, signTransaction } from "./Transaction";
-import Wallet from "./Wallet";
+import Transaction, { createTransaction, signTransaction } from './Transaction';
+import Wallet from './Wallet';
 
 export const proofOfWork = (block: Block): Block => {
   // tslint:disable-next-line
@@ -20,14 +20,21 @@ export const proofOfWork = (block: Block): Block => {
 };
 
 export const mine = (blockchain: Blockchain, wallet: Wallet): Block => {
-
-  const newTransaction = createTransaction(wallet.publicKey, wallet.publicKey, blockchain.reward, true);
+  const newTransaction = createTransaction(
+    wallet.publicKey,
+    wallet.publicKey,
+    blockchain.reward,
+    true
+  );
   // Coinbase transaction
   const coinbaseTransaction: Transaction = signTransaction(
     wallet.privateKey,
-    newTransaction,
+    newTransaction
   );
-  const transactions: ReadonlyArray<Transaction> = [coinbaseTransaction, ...blockchain.pendingTransactions];
+  const transactions: ReadonlyArray<Transaction> = [
+    coinbaseTransaction,
+    ...blockchain.pendingTransactions
+  ];
   const lastBlock: Block = blockchain.chain[blockchain.chain.length - 1];
   const previousHash: string = hash(stringify(lastBlock));
   const block: Block = createBlock(transactions, previousHash, Date.now(), 0);
