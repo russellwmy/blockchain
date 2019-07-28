@@ -8,16 +8,15 @@ const curve = 'secp128r1';
 const ec = new rsasign.ECDSA({ curve });
 
 // Creates SHA-256 hash of the string
-// @ts-ignore
-export const hash = (string: string): string => {
+export const hash = (text: string): string => {
   return crypto
     .createHash('sha256')
-    .update(string)
+    .update(text)
     .digest('hex');
 }
 
 // Generates the public/private key pair
-export const generateKeyPair = (): string[] => {
+export const generateKeyPair = (): ReadonlyArray<string> => {
   const keyPair = ec.generateKeyPairHex();
   return [keyPair.ecpubhex, keyPair.ecprvhex];
 }

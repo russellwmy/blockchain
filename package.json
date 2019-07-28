@@ -50,6 +50,7 @@
     "node": ">=8.9"
   },
   "dependencies": {
+    "@types/json-stable-stringify": "^1.0.32",
     "json-stable-stringify": "^1.0.1",
     "jsrsasign": "^8.0.12"
   },
