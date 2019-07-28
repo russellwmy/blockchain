@@ -1,7 +1,7 @@
 import stringify from 'json-stable-stringify';
 import { hash, signWithPrivateKey, verifyWithPublicKey } from './Crypto';
 
-interface Transaction {
+export interface Transaction {
   readonly sender: string; // Public key address of a transaction sender
   readonly recipient: string; // Public key address of a transaction recipient
   readonly amount: number; // Amount of coins to be transferred
@@ -42,5 +42,3 @@ export const validateTransaction = (transaction: Transaction): boolean => {
 
   return verifyWithPublicKey(transaction.sender, transactionHash, signature);
 };
-
-export default Transaction;

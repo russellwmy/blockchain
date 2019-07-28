@@ -1,9 +1,9 @@
 import stringify from 'json-stable-stringify';
-import Block, { createBlock, validateBlock } from './Block';
-import Blockchain from './Blockchain';
+import { Block, createBlock, validateBlock } from './Block';
+import { Blockchain } from './Blockchain';
 import { hash } from './Crypto';
-import Transaction, { createTransaction, signTransaction } from './Transaction';
-import Wallet from './Wallet';
+import { createTransaction, signTransaction, Transaction } from './Transaction';
+import { Wallet } from './Wallet';
 
 export const proofOfWork = (block: Block): Block => {
   // tslint:disable-next-line

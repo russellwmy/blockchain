@@ -1,6 +1,6 @@
 import { generateKeyPair } from './Crypto';
 
-interface Wallet {
+export interface Wallet {
   readonly publicKey: string;
   readonly privateKey: string;
 }
@@ -13,5 +13,3 @@ export const createWallet = (): Wallet => {
     publicKey
   };
 };
-
-export default Wallet;

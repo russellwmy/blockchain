@@ -1,9 +1,9 @@
 import stringify from 'json-stable-stringify';
-import Block, { createBlock, validateBlock } from './Block';
+import { Block, createBlock, validateBlock } from './Block';
 import { hash } from './Crypto';
-import Transaction from './Transaction';
+import { Transaction } from './Transaction';
 
-interface Blockchain {
+export interface Blockchain {
   readonly chain: ReadonlyArray<Block>;
   readonly pendingTransactions: ReadonlyArray<Transaction>;
   readonly difficulty: number;
@@ -71,5 +71,3 @@ export const createBlockChain = (): Blockchain => {
   const genesisBlock = createBlock([], undefined, 0, 1337);
   return addBlock(blockchain, genesisBlock);
 };
-
-export default Blockchain;
