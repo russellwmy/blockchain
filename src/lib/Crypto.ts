@@ -33,7 +33,7 @@ export const signWithPrivateKey = (
 export const verifyWithPublicKey = (
   publicKey: string,
   dataHash: string,
-  signature: string
+  signature?: string
 ): boolean => {
   return ec.verifyHex(dataHash, signature, publicKey);
 };
